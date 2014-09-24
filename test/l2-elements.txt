@@ -1,0 +1,64 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Variables ***
+${login_locator1}    id=linklogin
+${login_locator2}    link=登 录
+${close_locator}    link=关闭
+${login_button_locator}    id=btnlogin
+${login_button_qq}    id=login_button
+
+*** Keywords ***
+验证页面标题
+    [Arguments]    ${targetPageTitle}
+    Title Should Be    ${targetPageTitle}
+
+点击登录-页面顶部
+    Click Element    ${login_locator1}
+
+点击登录-主页名片
+    Click Link    ${login_locator2}
+
+选择登录窗口
+    Wait Until Element Is Visible    id=fancybox-content
+
+输入用户名
+    [Arguments]    ${username}
+    Input Text    name=username    ${username}
+
+输入密码
+    [Arguments]    ${userpassword}
+    Input Password    name=userpwd    ${userpassword}
+
+输入QQ账号
+    [Arguments]    ${qq username}
+    Input Text    id=u    ${qq username}
+
+输入QQ密码
+    [Arguments]    ${qq password}
+    Input Password    id=p    ${qq password}
+
+提交登录
+    [Arguments]    ${login button}
+    Click Button    ${login button}
+
+输入搜索内容
+    [Arguments]    ${search content}
+    Input Text    id=keyword    ${search content}
+
+提交搜索
+    Click Link    link=搜索
+
+跳转到最新页面
+
+返回到前一页面
+    Select Window    popupName
+
+关闭浏览器前一页面
+
+定位搜索结果页面
+    [Arguments]    ${search content}
+    Select Window    url=${LOGIN_URL}/index.php?mod=search&keyword=${search content}
+
+关闭当前页面
+    Close Window

@@ -1,0 +1,57 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          l1-page.txt
+Resource          l2-elements.txt
+
+*** Keywords ***
+有效登录-入口1
+    [Arguments]    ${username}    ${password}
+    点击登录-页面顶部
+    选择登录窗口
+    输入用户名    ${username}
+    输入密码    ${password}
+    提交登录    ${login_button_locator}
+    有效登录验证
+    有效登录退出
+
+有效登录-入口2
+    [Arguments]    ${username}    ${password}
+    点击登录-主页名片
+    选择登录窗口
+    输入用户名    ${username}
+    输入密码    ${password}
+    提交登录    ${login_button_locator}
+    有效登录验证
+    有效登录退出
+
+无效登录
+    [Arguments]    ${username}    ${password}
+    点击登录-页面顶部
+    选择登录窗口
+    输入用户名    ${username}
+    输入密码    ${password}
+    提交登录    ${login_button_locator}
+    无效登录验证
+    无效登录退出
+
+QQ授权登录
+    [Arguments]    ${username}    ${password}
+    点击登录-页面顶部
+    选择登录窗口
+    选择QQ授权登录
+    输入QQ账号    ${username}
+    输入QQ密码    ${password}
+    提交登录    ${login_button_qq}
+    有效登录验证
+    有效登录退出
+
+搜索测试
+    [Arguments]    ${search content}
+    输入搜索内容    ${search content}
+    提交搜索
+    Sleep    1 min
+    定位搜索结果页面    ${search content}
+    Wait Until Keyword Succeeds    2 min    5 sec    定位搜索结果页面    ${search content}
+    搜索结果验证    ${search content}
+    关闭当前页面
+    返回到前一页面

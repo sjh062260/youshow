@@ -1,0 +1,61 @@
+*** Settings ***
+Documentation     只包含登录功能，注册功能因为有动态验证码验证，手动测试
+Suite Setup       打开登录页
+Suite Teardown    关闭浏览器
+Library           Selenium2Library
+Resource          l0-testflow.txt
+Resource          l1-page.txt
+Resource          l2-elements.txt
+
+*** Variables ***
+${VALID_USERNAME}    sjh062260
+${VALID_PASSWORD}    shi1987122
+${LOGIN_URL}      http://www.youshow.cn
+${PAGETITLE_INDEX}    悠秀 | 你的舞台,想秀就秀 | 真人秀 | 安卓美女
+${EMPTY}          ${EMPTY}
+${QQ_USERNAME}    453844704
+${QQ_PASSWORD}    sjh062260wow
+${VALID_SEARCHCONTENT}    260
+${INVALID_SEARCHCONTENT}    http
+
+*** Test Cases ***
+LoginTest001-Valid Username and Password
+    [Tags]    LgoinTest    Valid Username and Password
+    有效登录-入口1    ${VALID_USERNAME}    ${VALID_PASSWORD}
+    有效登录-入口2    ${VALID_USERNAME}    ${VALID_PASSWORD}
+
+LoginTest002-Invalid Username
+    [Tags]    LoginTest    Invalid Username
+    无效登录    invalid username    ${VALID_PASSWORD}
+
+LoginTest003-Invalid Password
+    [Tags]    LoginTest    Invalid Password
+    无效登录    ${VALID_USERNAME}    invalid password
+
+LoginTest004-Empty Username
+    [Tags]    LoginTest    Empty Username
+    无效登录    ${EMPTY}    ${VALID_PASSWORD}
+
+LoginTest005-Empty Password
+    [Tags]    Login Test    Empty Password
+    无效登录    ${VALID_USERNAME}    ${EMPTY}
+
+LoginTest006-Empty Username and Password
+    [Tags]    LoginTest    Empty Username and Password
+    无效登录    ${EMPTY}    ${EMPTY}
+
+LoginTest007-QQ Login Auth
+    [Tags]    LoginTest    QQ Login Auth
+    QQ授权登录    ${QQ_USERNAME}    ${QQ_PASSWORD}
+
+Search Test001-Empty Search Content
+    [Tags]    Search Test
+    搜索测试    ${EMPTY}
+
+Search Test002- Valid Search Content
+    [Tags]    Search Test
+    搜索测试    ${VALID_SEARCHCONTENT}
+
+Search Test003-Invalid Search Content
+    [Tags]    Search Test
+    搜索测试    ${INVALID_SEARCHCONTENT}
