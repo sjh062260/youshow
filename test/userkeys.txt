@@ -1,0 +1,11 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Keywords ***
+打开浏览器
+    Open Browser    http://nvc1.sxsapp.com    ff
+    Wait Until Page Contains    悠秀
+
+打开登陆框
+    Click Button    id=linklogin
+    Wait Until Page Contains Element    id=fancybox-content

@@ -1,0 +1,6 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Keywords ***
+登陆测试
+    [Arguments]    ${username}    ${password}
