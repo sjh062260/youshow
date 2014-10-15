@@ -1,0 +1,39 @@
+*** Settings ***
+Documentation     A test suite containing tests related to invalid login.
+...
+...               These tests are data-driven by their nature. They use a single
+...               keyword, specified with Test Template setting, that is called
+...               with different arguments to cover different scenarios.
+...
+...               This suite also demonstrates using setups and teardowns in
+...               different levels.
+Suite Setup       打开登陆页
+Suite Teardown    关闭浏览器
+Test Setup        打开登陆框
+Test Template     无效登陆
+Resource          业务流程关键字.txt
+Library           Selenium2Library
+
+*** Test Cases ***    User Name        Password
+用例-无效用户名              invalid          ${VALID PASSWORD}
+
+用例-无效密码               ${VALID USER}    invalid
+
+用例-无效用户名和密码           invalid          whatever
+
+用例-空的用户名              ${EMPTY}         ${VALID PASSWORD}
+
+用例-空的密码               ${VALID USER}    ${EMPTY}
+
+用例-空的用户名和密码           ${EMPTY}         ${EMPTY}
+
+*** Keywords ***
+无效登陆
+    [Arguments]    ${username}    ${password}
+    输入用户名    ${username}
+    输入密码    ${password}
+    提交认证
+    登陆失败校验
+
+登陆失败校验
+    Page Should Contain Element    id=loginform

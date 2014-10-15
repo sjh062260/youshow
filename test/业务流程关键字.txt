@@ -9,7 +9,7 @@ Library           Selenium2Library
 *** Variables ***
 ${SERVER}         nvc1.sxsapp.com
 ${BROWSER}        Firefox
-${DELAY}          0
+${DELAY}          1
 ${VALID USER}     testsjh
 ${VALID PASSWORD}    testsjh
 ${LOGIN URL}      http://${SERVER}/
@@ -17,30 +17,31 @@ ${WELCOME URL}    http://${SERVER}/welcome.html
 ${ERROR URL}      http://${SERVER}/error.html
 
 *** Keywords ***
-Open Browser To Login Page
+打开登陆页
     Open Browser    ${LOGIN URL}    ${BROWSER}
     Maximize Browser Window
     Set Selenium Speed    ${DELAY}
-    Login Page Should Be Open
+    校验登陆页
 
-Login Page Should Be Open
-    Title Should Be    Login Page
+校验登陆页
+    Page Should Contain Element    id=linklogin
 
-Go To Login Page
-    Go To    ${LOGIN URL}
-    Login Page Should Be Open
+打开登陆框
+    Click Element    id=linklogin
 
-Input Username
+输入用户名
     [Arguments]    ${username}
-    Input Text    username_field    ${username}
+    Input Text    name=username    ${username}
 
-Input Password
+输入密码
     [Arguments]    ${password}
-    Input Text    password_field    ${password}
+    Input Text    name=userpwd    ${password}
 
-Submit Credentials
-    Click Button    login_button
+提交认证
+    Click Button    btnlogin
 
-Welcome Page Should Be Open
-    Location Should Be    ${WELCOME URL}
-    Title Should Be    Welcome Page
+校验登陆结果
+    Page Should Contain Element    id=linkExit
+
+关闭浏览器
+    Close Browser
