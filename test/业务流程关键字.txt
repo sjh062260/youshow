@@ -10,11 +10,15 @@ Library           Selenium2Library
 ${SERVER}         nvc1.sxsapp.com
 ${BROWSER}        Firefox
 ${DELAY}          1
-${VALID USER}     testsjh
-${VALID PASSWORD}    testsjh
+${VALID USER}     testsjh001
+${VALID PASSWORD}    testsjh001
 ${LOGIN URL}      http://${SERVER}/
 ${WELCOME URL}    http://${SERVER}/welcome.html
 ${ERROR URL}      http://${SERVER}/error.html
+${NICKNAME}       那个死哈士奇，不知道
+${FAMILY}         打豆豆
+${UID}            1061147
+${SEARCH RESULT URL}    http://${SERVER}/index.php?mod=search&keyword=
 
 *** Keywords ***
 打开登陆页
@@ -45,3 +49,10 @@ ${ERROR URL}      http://${SERVER}/error.html
 
 关闭浏览器
     Close Browser
+
+搜索内容
+    [Arguments]    ${search_content}
+    Input Text    id=keyword    ${search_content}
+
+校验搜索结果页
+    Location Should Be    ${SEARCH RESULT URL}+${search_content}
