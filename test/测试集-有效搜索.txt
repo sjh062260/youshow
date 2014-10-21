@@ -2,14 +2,21 @@
 Documentation     有效搜索：昵称，家族，和悠秀号
 Suite Setup       打开登陆页
 Suite Teardown    关闭浏览器
-Test Setup        搜索内容
+Test Setup        打开登陆页
+Test Template     有效搜索
 Resource          业务流程关键字.txt
 
-*** Test Cases ***
-用例-昵称搜索
+*** Test Cases ***    Search Content
+用例-昵称搜索               哈士奇
 
-用例-家族搜索
+用例-家族搜索               打豆豆
 
-用例-悠秀号搜索
+用例-悠秀号搜索              1061147
 
-用例-部分内容搜索
+用例-部分内容搜索             106114
+
+*** Keywords ***
+有效搜索
+    [Arguments]    ${search_content}
+    输入搜索内容    ${search_content}
+    校验搜索结果    ${search_content}

@@ -50,9 +50,12 @@ ${SEARCH RESULT URL}    http://${SERVER}/index.php?mod=search&keyword=
 关闭浏览器
     Close Browser
 
-搜索内容
+输入搜索内容
     [Arguments]    ${search_content}
     Input Text    id=keyword    ${search_content}
+    Click Element    id=search
 
-校验搜索结果页
-    Location Should Be    ${SEARCH RESULT URL}+${search_content}
+校验搜索结果
+    [Arguments]    ${search_content}
+    Location Should Be    ${SEARCH RESULT URL}${search_content}
+    Page Should Contain    ${search_content}
