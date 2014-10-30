@@ -1,8 +1,7 @@
 *** Settings ***
 Documentation     有效搜索：昵称，家族，和悠秀号
-Suite Setup       打开登陆页
-Suite Teardown    关闭浏览器
 Test Setup        打开登陆页
+Test Teardown     关闭浏览器
 Test Template     有效搜索
 Resource          业务流程关键字.txt
 

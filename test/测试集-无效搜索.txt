@@ -2,11 +2,15 @@
 Documentation     无效测试集，包括：空搜索，不符合规则搜索内容。
 Suite Setup       打开登陆页
 Suite Teardown    关闭浏览器
-Test Setup        打开登陆页
-Test Template     无效搜索
 Resource          业务流程关键字.txt
 
 *** Test Cases ***
 用例-空搜索
+    输入搜索内容    ${EMPTY}
+    Alert Should Be Present    昵称、家族、悠秀号
 
 用例-搜索内容过长
+    输入搜索内容    ${TO LONG SEARCH CONTENT}
+    Go To    ${SEARCH RESULT BASE URL}${TO LONG SEARCH CONTENT}
+    Page Should Contain    没有找到相关信息
+    Close Browser

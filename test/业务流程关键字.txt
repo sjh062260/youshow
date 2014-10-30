@@ -18,8 +18,8 @@ ${ERROR URL}      http://${SERVER}/error.html
 ${NICKNAME}       那个死哈士奇，不知道
 ${FAMILY}         打豆豆
 ${UID}            1061147
-${SEARCH RESULT URL}    http://${SERVER}/index.php?mod=search&keyword=
-${ACTIVITY BASE URL}    http://${SERVER}/index.php?mod=activity&do=
+${SEARCH RESULT BASE URL}    ${LOGIN URL}index.php?mod=search&keyword=
+${TO LONG SEARCH CONTENT}    我的昵称太长躲在树后面部落看不到我
 
 *** Keywords ***
 打开登陆页
@@ -58,17 +58,5 @@ ${ACTIVITY BASE URL}    http://${SERVER}/index.php?mod=activity&do=
 
 校验搜索结果
     [Arguments]    ${search_content}
-    Location Should Be    ${SEARCH RESULT URL}${search_content}
+    Go To    ${SEARCH RESULT BASE URL}${search_content}
     Page Should Contain    ${search_content}
-
-打开活动排行榜页
-    [Arguments]    ${ACTIVITY NAME}
-    Open Browser    ${ACTIVITY BASE URL}${ACTIVITY NAME}    ${BROWSER}
-    Maximize Browser Window
-    Set Selenium Speed    ${DELAY}
-    Page Should Contain    请输入悠秀号
-
-活动搜索
-    Input Text    id=uid1    empty
-    Click Link    link=查询
-    Alert Should Be Present    请输入悠秀号
