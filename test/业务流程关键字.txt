@@ -20,6 +20,7 @@ ${FAMILY}         打豆豆
 ${UID}            1061147
 ${SEARCH RESULT BASE URL}    ${LOGIN URL}index.php?mod=search&keyword=
 ${TO LONG SEARCH CONTENT}    我的昵称太长躲在树后面部落看不到我
+${PAY URL}        ${LOGIN URL}/index.php?mod=pay
 
 *** Keywords ***
 打开登陆页
@@ -60,3 +61,11 @@ ${TO LONG SEARCH CONTENT}    我的昵称太长躲在树后面部落看不到我
     [Arguments]    ${search_content}
     Go To    ${SEARCH RESULT BASE URL}${search_content}
     Page Should Contain    ${search_content}
+
+登陆充值页面
+    打开登陆页
+    打开登陆框
+    输入用户名    ${VALID USER}
+    输入密码    ${VALID PASSWORD}
+    Click Element    id=userpay
+    Select Window    ${PAY URL}

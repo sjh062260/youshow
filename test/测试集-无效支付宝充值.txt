@@ -1,0 +1,8 @@
+*** Settings ***
+Suite Setup       登陆充值页面
+Suite Teardown    关闭浏览器
+
+*** Test Cases ***
+
+*** Keywords ***
+支付宝充值流程
